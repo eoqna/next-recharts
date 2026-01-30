@@ -15,16 +15,18 @@ export default function LineChartComponent() {
     ];
 
     return (
-        <LineChart style={{ width: "100%", aspectRatio: 1.618, maxWidth: 800, margin: "auto" }} responsive data={data}>
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-            <XAxis dataKey="name" />
-            <YAxis width="auto" />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend />
-            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-            <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
-            <Line type="monotone" dataKey="amt" stroke="#ff0000" />
-        </LineChart>
+        <div className="flex h-full align-center justify-center">
+            <LineChart style={{ width: "100%", aspectRatio: 1.618, maxWidth: 800, margin: "auto" }} responsive data={data}>
+                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                <XAxis dataKey="name" />
+                <YAxis width="auto" />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+                <Line type="monotone" dataKey="pv" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="amt" stroke="#ff0000" />
+            </LineChart>
+        </div>
     );
 };
 

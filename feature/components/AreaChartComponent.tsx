@@ -1,27 +1,62 @@
 "use client";
 
-import { AreaChart, CartesianGrid, Area, XAxis, YAxis } from "recharts";
-import { ChartData } from "recharts/types/state/chartDataSlice";
+import {
+    AreaChart, CartesianGrid,
+    Area, XAxis,
+    YAxis, Tooltip,
+    Legend, TooltipContentProps
+} from "recharts";
 
 export default function AreaChartComponent() {
-    const data: ChartData = [
-        { name: 'Page A', uv: 4000, pv: 2400, amt: 2400 },
-        { name: 'Page B', uv: 3000, pv: 1398, amt: 2210 },
-        { name: 'Page C', uv: 2000, pv: 9800, amt: 2290 },
-        { name: 'Page D', uv: 2780, pv: 3908, amt: 2000 },
-        { name: 'Page E', uv: 1890, pv: 4800, amt: 2181 },
-        { name: 'Page F', uv: 2390, pv: 3800, amt: 2500 },
-        { name: 'Page G', uv: 3490, pv: 4300, amt: 2100 },
+    // 차트 더미 데이터 생성
+    const data = [
+        { name: 'Data A', a: 4000, b: 2400, c: 2400 },
+        { name: 'Data B', a: 3000, b: 1398, c: 2210 },
+        { name: 'Data C', a: 2000, b: 9800, c: 2290 },
+        { name: 'Data D', a: 2780, b: 3908, c: 2000 },
+        { name: 'Data E', a: 1890, b: 4800, c: 2181 },
+        { name: 'Data F', a: 2390, b: 3800, c: 2500 },
+        { name: 'Data G', a: 3490, b: 4300, c: 2100 },
     ];
 
     return (
-        <AreaChart style={{ width: "100%", aspectRatio: 1.618, maxWidth: 800, margin: "auto" }} responsive data={data}>
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-            <XAxis dataKey="name" />
-            <YAxis width="auto" />
-            <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-            <Area type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
-            <Area type="monotone" dataKey="amt" stroke="#ff0000" fill="#ff0000" />
-        </AreaChart>
+        <div className="flex h-full align-center justify-center">
+            <AreaChart style={{ aspectRatio: 1.618, maxWidth: 800, margin: "auto" }} width="100%" responsive data={data}>
+                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                <XAxis dataKey="name" />
+                <YAxis width="auto" />
+                <Legend />
+                {/* <Tooltip /> */}
+                <Tooltip content={CustomTooltip} />
+                <Area type="monotone" dataKey="a" stroke="#8884d8" fill="#8884d8" />
+                <Area type="monotone" dataKey="b" stroke="#82ca9d" fill="#82ca9d" />
+                <Area type="monotone" dataKey="c" stroke="#ff0000" fill="#ff0000" />
+            </AreaChart>
+        </div>
     );
+};
+
+// Custom Tooltip Component
+const CustomTooltip = ({ active, payload, label }: TooltipContentProps<number, string>) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="bg-slate-900 flex flex-col gap-4 p-4 rounded-md">
+                <p className="text-medium text-lg">{label}</p>
+                <p className="text-sm text-red-400">
+                    a:
+                    <span className="ml-2">{payload[0].value}</span>
+                </p>
+                <p className="text-sm text-green-400">
+                    b:
+                    <span className="ml-2">{payload[1].value}</span>
+                </p>
+                <p className="text-sm text-indigo-400">
+                    c:
+                    <span className="ml-2">{payload[2].value}</span>
+                </p>
+            </div>
+        );
+    }
+
+    return null;
 };

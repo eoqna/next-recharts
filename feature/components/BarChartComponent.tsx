@@ -15,13 +15,15 @@ export default function BarChartComponent() {
     ];
 
     return (
-        <BarChart style={{ width: "100%", aspectRatio: 1.618, maxWidth: 800, margin: "auto" }} responsive data={data}>
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-            <XAxis dataKey="name" />
-            <YAxis width="auto" />
-            <Bar type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-            <Bar type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
-            <Bar type="monotone" dataKey="amt" stroke="#ff0000" fill="#ff0000" />
-        </BarChart>
+        <div className="flex h-full align-center justify-center">
+            <BarChart style={{ width: "100%", aspectRatio: 1.618, maxWidth: 800, margin: "auto" }} responsive data={data}>
+                <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                <XAxis dataKey="name" />
+                <YAxis width="auto" />
+                <Bar type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+                <Bar type="monotone" dataKey="pv" stroke="#82ca9d" fill="#82ca9d" />
+                <Bar type="monotone" dataKey="amt" stroke="#ff0000" fill="#ff0000" />
+            </BarChart>
+        </div>
     );
 };
